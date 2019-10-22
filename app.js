@@ -1,6 +1,8 @@
 var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var swaggerUi = require('swagger-ui-express');
+var swaggerDocument = require('./swagger.json')
 var app = express();
 
 // Log requests to the console.
@@ -22,13 +24,7 @@ models.sequelize.sync().then(() => {
 
 require('./server/routes')(app);
 
-app.get('*', (req, res) => {
-    return res.status(200).send({
-        message: 'Welcome to beginning of nothingness !'
-    })
-});
-
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server started !")
 })

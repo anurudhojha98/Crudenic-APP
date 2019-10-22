@@ -1,0 +1,155 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Node.js swagger integration demo",
+        "description": " Node.js Application API"
+    },
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Company",
+            "description": "API for company employees"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/company": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Save company details",
+                "description": "Create new company",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "body",
+                        "description": "Company that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Company created successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                }
+            }
+        },
+        "/company-list": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Get company list",
+                "responses": {
+                    "200": {
+                        "description": "Company found successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                }
+            }
+        },
+        "/company/{companyId}/employee": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "Save employee details",
+                "description": "Create new employee",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "body",
+                        "description": "Employee that we want to create",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    },
+                    {
+                        "name": "companyId",
+                        "in": "path",
+                        "description": "This is companyId ",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee created successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    }
+                }
+            }
+        },
+        "/employee-list": {
+            "get": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "Get employee list",
+                "responses": {
+                    "200": {
+                        "description": "Employee found successfully.",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Company": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Companies": {
+            "type": "array",
+            "$ref": "#/definitions/Company"
+        },
+        "Employee": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "designation": {
+                    "type": "string"
+                },
+                "companyId": {
+                    "type": "number",
+                    "required": "true"
+                }
+            }
+        }
+    }
+}
