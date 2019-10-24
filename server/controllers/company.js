@@ -1,7 +1,11 @@
 const Company = require('../../models').Company;
 const Employee = require('../../models').Employee;
+
+var logger = require('../../logger');
+
 module.exports = {
     create(req, res) {
+        logger.info("Function started!")
         return Company.create({
             name: req.body.name,
         }).then(company => res.status(200).send(company))
