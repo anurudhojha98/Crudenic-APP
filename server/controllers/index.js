@@ -1,7 +1,7 @@
-const company = require('./company');
-const employee = require('./employee');
+const companyController = require('../controllers').company;
+const employeeController = require('../controllers').employee;
 
 module.exports = {
-    company,
-    employee
+    companyController,
+    employeeController
 };
